@@ -24,3 +24,4 @@ A gaze-controlled visual search game where the player uses their eyes to interac
 Install the required packages:
 
 ```bash
+pip install -r requirements.txt
