@@ -5,16 +5,6 @@ import numpy as np
 import time
 from collections import deque
 
-# ============================================================
-# EYE-CONTROLLED TIC-TAC-TOE
-# Features:
-# - MediaPipe iris tracking
-# - Gaze -> 3x3 board mapping
-# - Smooth gaze tracking
-# - Adaptive dwell time
-# - AI opponent using Minimax
-# - Gaze heatmap / game statistics
-# ============================================================
 
 # ---------------- CAMERA ----------------
 cam = cv2.VideoCapture(0)
@@ -61,7 +51,6 @@ smooth_y = HEIGHT / 2
 
 alpha = 0.35
 
-# Recent gaze points are used to estimate stability.
 gaze_history = deque(maxlen=12)
 
 # Base dwell time.
@@ -201,9 +190,7 @@ def draw_status(frame, text, color=(255, 255, 255)):
     )
 
 
-# ============================================================
-# GAME LOGIC
-# ============================================================
+
 
 def check_winner(state):
     for r in range(3):
@@ -360,9 +347,9 @@ def make_ai_move():
     current_player = PLAYER
 
 
-# ============================================================
+
 # MAIN LOOP
-# ============================================================
+
 
 while True:
 
@@ -384,11 +371,10 @@ while True:
     draw_background(game)
     draw_grid(game)
     draw_heatmap(game)
-    draw_moves(game)
-
-    # --------------------------------------------------------
+    draw_moves
+    
     # PLAYER TURN: EYE TRACKING
-    # --------------------------------------------------------
+  
     if current_player == PLAYER and not game_over:
 
         if result.multi_face_landmarks:
@@ -645,9 +631,9 @@ while True:
             2
         )
 
-    # --------------------------------------------------------
+  
     # TOP / BOTTOM UI
-    # --------------------------------------------------------
+
     if not game_over:
         turn_text = "YOUR TURN (X)" if current_player == PLAYER else "AI TURN (O)"
 
@@ -682,7 +668,7 @@ while True:
         reset_game()
 
 
-# ---------------- CLEANUP ----------------
+
 cam.release()
 face_mesh.close()
 cv2.destroyAllWindows()
